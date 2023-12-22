@@ -8,39 +8,19 @@ public class Main {
     public static void directoryCreation(String name1, String name2) {
         File directoryName = new File("/Users/ivangoyda/Documents/" + name1 + "/" + name2);
         if (directoryName.mkdir()) {
-            log.append("Папка ")
-                    .append(name2)
-                    .append(" создана: ")
-                    .append(directoryName)
-                    .append("\n");
+            log.append("Папка " + name2 + " создана: " + directoryName + "\n");
         } else {
-            log.append("Папка ")
-                    .append(name2)
-                    .append(" не создана: ")
-                    .append(directoryName)
-                    .append("\n");
+            log.append("Папка " + name2 + " не создана: " + directoryName + "\n");
         }
     }
 
-    public static void fileCreation(String directoryPath, String name, String format) {
-        File fileCreation = new File(directoryPath + name + "." + format);
+    public static void fileCreation(String directoryPath, String name) {
+        File fileCreation = new File(directoryPath + name);
         try {
             if (fileCreation.createNewFile()) {
-                log.append("Файл ")
-                        .append(name)
-                        .append(".")
-                        .append(format)
-                        .append(" создан: ")
-                        .append(fileCreation)
-                        .append("\n");
+                log.append("Файл " + name +  " создан: " + fileCreation + "\n");
             } else {
-                log.append("Файл ")
-                        .append(name)
-                        .append(".")
-                        .append(format)
-                        .append(" не создан: ")
-                        .append(fileCreation)
-                        .append("\n");
+                log.append("Файл " + name +  " не создан: " + fileCreation + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -59,14 +39,14 @@ public class Main {
         directoryCreation("Games/src", "main");
         directoryCreation("Games/src", "test");
         //3
-        fileCreation("/Users/ivangoyda/Documents/Games/src/main/", "Main", "java");
-        fileCreation("/Users/ivangoyda/Documents/Games/src/main/", "Utils", "java");
+        fileCreation("/Users/ivangoyda/Documents/Games/src/main/", "Main.java");
+        fileCreation("/Users/ivangoyda/Documents/Games/src/main/", "Utils.java");
         //4
         directoryCreation("Games/res", "drawables");
         directoryCreation("Games/res", "vectors");
         directoryCreation("Games/res", "icons");
         //5
-        fileCreation("/Users/ivangoyda/Documents/Games/temp/", "temp", "txt");
+        fileCreation("/Users/ivangoyda/Documents/Games/temp/", "temp.txt");
         //Запись логов в файл
         try {
             writer = new FileWriter("/Users/ivangoyda/Documents/Games/temp/temp.txt");
