@@ -1,16 +1,17 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     static StringBuilder log = new StringBuilder();
 
-    public static void directoryCreation(String name1, String name2) {
-        File directoryName = new File("/Users/ivangoyda/Documents/" + name1 + "/" + name2);
+    public static void directoryCreation(String name) {
+        File directoryName = new File(name);
         if (directoryName.mkdir()) {
-            log.append("Папка " + name2 + " создана: " + directoryName + "\n");
+            log.append("Директория создана: " + directoryName + "\n");
         } else {
-            log.append("Папка " + name2 + " не создана: " + directoryName + "\n");
+            log.append("Директория не создана: " + directoryName + "\n");
         }
     }
 
@@ -18,9 +19,9 @@ public class Main {
         File fileCreation = new File(directoryPath + name);
         try {
             if (fileCreation.createNewFile()) {
-                log.append("Файл " + name +  " создан: " + fileCreation + "\n");
+                log.append("Файл создан: " + fileCreation + "\n");
             } else {
-                log.append("Файл " + name +  " не создан: " + fileCreation + "\n");
+                log.append("Файл не создан: " + fileCreation + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -30,22 +31,22 @@ public class Main {
     public static void main(String[] args) {
         FileWriter writer = null;
 
-        //1
-        directoryCreation("Games", "src");
-        directoryCreation("Games", "res");
-        directoryCreation("Games", "savegames");
-        directoryCreation("Games", "temp");
-        //2
-        directoryCreation("Games/src", "main");
-        directoryCreation("Games/src", "test");
-        //3
+
+        List<String> listDirectories = List.of(
+                "/Users/ivangoyda/Documents/Games/src/",
+                "/Users/ivangoyda/Documents/Games/res",
+                "/Users/ivangoyda/Documents/Games/saveGames",
+                "/Users/ivangoyda/Documents/Games/src/main/",
+                "/Users/ivangoyda/Documents/Games/src/test/",
+                "/Users/ivangoyda/Documents/Games/temp/",
+                "/Users/ivangoyda/Documents/Games/res/drawables",
+                "/Users/ivangoyda/Documents/Games/res/vectors",
+                "/Users/ivangoyda/Documents/Games/res/icons");
+        for (String directory : listDirectories){
+            directoryCreation(directory);
+        }
         fileCreation("/Users/ivangoyda/Documents/Games/src/main/", "Main.java");
         fileCreation("/Users/ivangoyda/Documents/Games/src/main/", "Utils.java");
-        //4
-        directoryCreation("Games/res", "drawables");
-        directoryCreation("Games/res", "vectors");
-        directoryCreation("Games/res", "icons");
-        //5
         fileCreation("/Users/ivangoyda/Documents/Games/temp/", "temp.txt");
         //Запись логов в файл
         try {
